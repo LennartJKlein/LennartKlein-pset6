@@ -120,15 +120,8 @@ public class ExploreFragment extends ListFragment {
                                 // If this is a photo
                                 if (Objects.equals(photo_type, "image")) {
 
-                                    // Build an HashMap object for this item (key-value pairs)
-                                    HashMap<String, String> photoObj = new HashMap<>();
-                                    photoObj.put("date", photo.getString("date"));
-                                    photoObj.put("title", photo.getString("title"));
-                                    photoObj.put("explanation", photo.getString("explanation"));
-                                    photoObj.put("url", photo.getString("url"));
-
                                     // Add HashMap object to array
-                                    photos.add(photoObj);
+                                    photos.add(hashImage(photo));
                                 }
                             }
                             // Use an adapter and the ArrayList to feed the list
@@ -151,11 +144,8 @@ public class ExploreFragment extends ListFragment {
                     }
                 });
 
-        // Give request 10 sec. to respond
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Make the timeout longer
+        request = lengthenRequestTimeout(request, 1000);
 
         // Set and run request
         RequestQueue queue = Volley.newRequestQueue(getActivity());
@@ -163,4 +153,36 @@ public class ExploreFragment extends ListFragment {
 
     }
 
+    /**
+     * Build an HashMap object for a photo (key-value pairs)
+     * @param photo:    a object containing an NASA photo
+     * @return:         a HashMap of the object
+     */
+    public HashMap<String, String> hashImage(JSONObject photo) {
+        HashMap<String, String> photoObj = new HashMap<>();
+        try {
+            photoObj.put("date", photo.getString("date"));
+            photoObj.put("title", photo.getString("title"));
+            photoObj.put("explanation", photo.getString("explanation"));
+            photoObj.put("url", photo.getString("url"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return photoObj;
+    }
+
+    /**
+     * Make the request timeout of a volley request longer
+     * @param request:      the request to adapt
+     * @param milliseconds: the time the request may take
+     * @return:             the adapted request
+     */
+    public StringRequest lengthenRequestTimeout(StringRequest request, int milliseconds) {
+        // Give request 10 sec. to respond
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                milliseconds,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        return request;
+    }
 }

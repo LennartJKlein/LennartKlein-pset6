@@ -84,7 +84,7 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    validateLogin();
                     return true;
                 }
                 return false;
@@ -93,7 +93,7 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                validateLogin();
             }
         });
 
@@ -115,7 +115,7 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void validateLogin() {
 
         // Reset errors
         mEmailView.setError(null);
@@ -161,51 +161,7 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
             // perform the user login attempt.
             showProgress(true);
 
-            // Sign in
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("Sign in", "signInWithEmail:success");
-                                enterApp();
-
-                            } else {
-                                Log.w("Sign in", "signInWithEmail:failure", task.getException());
-
-                                // Try to sign up
-                                mAuth.createUserWithEmailAndPassword(email, password)
-                                        .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                if (task.isSuccessful()) {
-                                                    // Sign up success. Log userID
-                                                    String userID = mAuth.getCurrentUser().getUid();
-                                                    String userMail = mAuth.getCurrentUser().getEmail();
-                                                    Log.d("Sign up", "createUserWithEmail:success - " + userID);
-
-                                                    // Save the user ID in the database
-                                                    User thisUser = new User(userID, userMail);
-                                                    DatabaseReference db = FirebaseDatabase.getInstance().getReference("users");
-                                                    db.child(userID).setValue(thisUser);
-
-                                                    // Enter the app
-                                                    enterApp();
-                                                } else {
-                                                    // If sign up fails, display a message to the user.
-                                                    Log.w("Sign up", "createUserWithEmail:failure", task.getException());
-                                                    Toast.makeText(SignInActivity.this, R.string.error_authentication, Toast.LENGTH_SHORT).show();
-                                                    showProgress(false);
-                                                }
-                                            }
-                                        });
-
-                                // Show input again
-                                showProgress(false);
-                            }
-                        }
-                    });
+            signIn(email, password);
         }
     }
 
@@ -221,6 +177,68 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
      */
     private boolean isPasswordValid(String password) {
         return password.length() > 6;
+    }
+
+    /**
+     * Sign a user in with FireBase authentication
+     * @param email:       the mail address of the user
+     * @param password:    the password of the user
+     */
+    public void signIn(final String email, final String password) {
+        // Sign in
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("Sign in", "signInWithEmail:success");
+                            enterApp();
+
+                        } else {
+                            Log.w("Sign in", "signInWithEmail:failure", task.getException());
+                            // Try to sign up the user instead
+                            signUp(email, password);
+
+                            // Show input again
+                            showProgress(false);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * Sign up a user in the FireBase database
+     * @param email:    the email address of the new user
+     * @param password: the password of the new user
+     */
+    public void signUp(String email, String password) {
+        // Try to sign up
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign up success. Log userID
+                            String userID = mAuth.getCurrentUser().getUid();
+                            String userMail = mAuth.getCurrentUser().getEmail();
+                            Log.d("Sign up", "createUserWithEmail:success - " + userID);
+
+                            // Save the user ID in the database
+                            User thisUser = new User(userID, userMail);
+                            DatabaseReference db = FirebaseDatabase.getInstance().getReference("users");
+                            db.child(userID).setValue(thisUser);
+
+                            // Enter the app
+                            enterApp();
+                        } else {
+                            // If sign up fails, display a message to the user.
+                            Log.w("Sign up", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignInActivity.this, R.string.error_authentication, Toast.LENGTH_SHORT).show();
+                            showProgress(false);
+                        }
+                    }
+                });
     }
 
     /**

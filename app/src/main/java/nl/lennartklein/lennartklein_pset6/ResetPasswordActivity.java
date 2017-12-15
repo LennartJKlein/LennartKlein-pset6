@@ -107,8 +107,6 @@ public class ResetPasswordActivity extends AppCompatActivity implements LoaderCa
         // Store values at the time of the login attempt
         final String email = mEmailView.getText().toString();
 
-        Log.d("Reset password", email);
-
         boolean cancel = false;
         View focusView = null;
 
@@ -124,22 +122,11 @@ public class ResetPasswordActivity extends AppCompatActivity implements LoaderCa
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            // There was an error; don't attempt login and focus the first form field with an error.
             focusView.requestFocus();
         } else {
             // Send reset password
-            mAuth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("Reset password", "Email sent.");
-                                Toast.makeText(getApplicationContext(), R.string.reset_send, Toast.LENGTH_SHORT).show();
-                                goToSignIn();
-                            }
-                        }
-                    });
+            sendPasswordReset(email);
         }
     }
 
@@ -148,6 +135,24 @@ public class ResetPasswordActivity extends AppCompatActivity implements LoaderCa
      */
     private boolean isEmailValid(String email) {
         return email.contains("@");
+    }
+
+    /**
+     * Send the reset link to the given mail address
+     * @param email:    the mail address to send the link to
+     */
+    public void sendPasswordReset(String email) {
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Reset password", "Email sent.");
+                            Toast.makeText(getApplicationContext(), R.string.reset_send, Toast.LENGTH_SHORT).show();
+                            goToSignIn();
+                        }
+                    }
+                });
     }
 
     /**
@@ -270,8 +275,5 @@ public class ResetPasswordActivity extends AppCompatActivity implements LoaderCa
         int IS_PRIMARY = 1;
     }
 
-    public void resetPassword(View view) {
-
-    }
 }
 
