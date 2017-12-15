@@ -1,5 +1,9 @@
 # ![Space Watchers - icon](/docs/app-icon.png?raw=true "Space Watchers - icon") Space Watchers
 
+<div style="text-align:right">
+[![BCH compliance](https://bettercodehub.com/edge/badge/LennartJKlein/LennartKlein-pset6?branch=master)](https://bettercodehub.com/)
+</div>
+
 An android app for space geeks. The app shows 25 images from NASA every day. Users can save their favorite images to their own collection. This collection is shared among other users.
 
 ![Space Watchers - signin](/docs/screenshot-signin.png?raw=true "Space Watchers - signin") 
