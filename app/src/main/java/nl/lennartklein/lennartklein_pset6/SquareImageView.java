@@ -1,10 +1,14 @@
 package nl.lennartklein.lennartklein_pset6;
 
-/* Created by Xingrz. https://gist.github.com/xingrz/c95cdedf57f45f60dd28 */
+/*  */
 
 import android.content.Context;
 import android.util.AttributeSet;
 
+/**
+ * An ImageView that is always squared and still responsive in width.
+ * Created by Xingrz. https://gist.github.com/xingrz/c95cdedf57f45f60dd28
+ */
 public class SquareImageView extends android.support.v7.widget.AppCompatImageView {
 
     public SquareImageView(Context context) {

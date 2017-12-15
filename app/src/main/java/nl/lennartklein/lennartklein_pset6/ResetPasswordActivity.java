@@ -154,7 +154,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements LoaderCa
      * Create and start an intent for the sign in activity
      */
     public void goToSignIn() {
-        startActivity(new Intent(this, SigninActivity.class));
+        startActivity(new Intent(this, SignInActivity.class));
         finish();
     }
 

@@ -6,8 +6,6 @@
     <color name="colorAccent">#9d92ff</color>
     <color name="colorHyperlink">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlack">#222222</color>
     <color name="colorGreyLight">#E6E6E6</color>
     <color name="colorGrey">#AAAAAA</color>
-    <color name="colorGreyDark">#777777</color>
 </resources>

@@ -19,14 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +35,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Shows the collected images of the current user and some account settings
+ */
 public class CollectionsFragment extends Fragment {
 
     // Global references
@@ -128,6 +129,9 @@ public class CollectionsFragment extends Fragment {
         }
     }
 
+    /**
+     * A database listener for the saved images of this user
+     */
     private class DatabaseListener implements ValueEventListener {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -167,13 +171,19 @@ public class CollectionsFragment extends Fragment {
             Log.d("Data","The read failed: " + databaseError.getCode());
         }
     }
-    
+
+    /**
+     * Update the data in the GridView by notifying the adapter
+     */
     private void refreshListContent() {
         refreshSwipe.setRefreshing(true);
         adapter.notifyDataSetChanged();
         refreshSwipe.setRefreshing(false);
     }
-    
+
+    /**
+     * A click listener for removing an image from the collection
+     */
     private class LongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, final long l) {
@@ -203,7 +213,11 @@ public class CollectionsFragment extends Fragment {
             return true;
         }
     }
-    
+
+    /**
+     * Set a submenu on an ImageButton and add click listeners
+     * @param view: the view that triggered the function
+     */
     private void setMoreMenu(View view) {
         ImageButton menuToggle = view.findViewById(R.id.button_menu_toggle);
         final PopupMenu mPopupMenu = new PopupMenu(getActivity(), menuToggle);
@@ -235,6 +249,9 @@ public class CollectionsFragment extends Fragment {
         });
     }
 
+    /**
+     * Show an alert to set a username in the database
+     */
     private void setUsername() {
         // Set up dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
@@ -288,15 +305,21 @@ public class CollectionsFragment extends Fragment {
         alert.show();
     }
 
+    /**
+     * If there is no current user, sign out
+     */
     public void verifyUser() {
         if (mAuth.getCurrentUser() == null) {
             signOut();
         }
     }
 
+    /**
+     * Signs the current user out and starts the login activity
+     */
     public void signOut() {
         mAuth.signOut();
-        startActivity(new Intent(getActivity(), SigninActivity.class));
+        startActivity(new Intent(getActivity(), SignInActivity.class));
         getActivity().finish();
     }
 

@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * The community fragment shows the collections of other users
+ */
 public class CommunityFragment extends Fragment {
 
     // Global references
@@ -45,7 +48,7 @@ public class CommunityFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Get Firebase instances
+        // Get FireBase instances
         mAuth = FirebaseAuth.getInstance();
         userID = mAuth.getCurrentUser().getUid();
         db = FirebaseDatabase.getInstance();
@@ -165,10 +168,17 @@ public class CommunityFragment extends Fragment {
         }
     }
 
+    /**
+     * Refresh the list of images by deleting and resetting a new listener
+     */
     private void refreshListContent() {
-        refreshSwipe.setRefreshing(true);
-        // TODO
-        refreshSwipe.setRefreshing(false);
+        if (db_all != null && listener != null) {
+            refreshSwipe.setRefreshing(true);
+            db_all.removeEventListener(listener);
+            listener = new CommunityFragment.DatabaseListener();
+            db_all.addValueEventListener(listener);
+            refreshSwipe.setRefreshing(false);
+        }
     }
 
 

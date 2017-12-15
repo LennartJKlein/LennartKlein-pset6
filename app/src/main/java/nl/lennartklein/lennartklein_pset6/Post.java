@@ -1,14 +1,15 @@
 package nl.lennartklein.lennartklein_pset6;
 
-import android.graphics.Bitmap;
-
+/**
+ * A saved post from the NASA apod feed
+ */
 public class Post {
     public String date;
     public String title;
     public String explanation;
     public String imagePath;
 
-    // Empty constructor for Firebase
+    // Empty constructor for FireBase
     public Post() {}
 
     public Post(String date, String title, String explanation, String imagePath) {

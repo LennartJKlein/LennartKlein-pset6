@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Universe Watchers</string>
     <string name="title_explore">Explore</string>
-    <string name="subtitle_explore">Newest pictures from NASA</string>
     <string name="title_collections">My Collection</string>
     <string name="title_community">Community</string>
-    <string name="title_about">About</string>
     <string name="title_activity_signin">Sign in</string>
     <string name="title_activity_resetpassword">Reset password</string>
 
@@ -16,7 +14,6 @@
     <string name="action_sign_out">Sign out</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
     <string name="error_authentication">Email already in use. Forgot your password?</string>
@@ -37,7 +34,7 @@
     <string name="placeholder_name">Collection of a user…</string>
     <string name="action_set_username">Change username</string>
     <string name="title_rename">Choose a username…</string>
-    <string name="label_ok">Ok</string>
+    <string name="label_ok">OK</string>
 
     <string name="error_no_posts">You have no images in your collection yet. Add them from the \'explore\' page.</string>
     <string name="error_network">No information found. Make sure your device has a network connection.</string>

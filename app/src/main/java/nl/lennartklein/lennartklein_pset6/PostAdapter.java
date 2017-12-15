@@ -57,6 +57,11 @@ public class PostAdapter extends ArrayAdapter<HashMap<String, String>> {
         return convertView;
     }
 
+    /**
+     * Load an image from storage and set it in an ImageView
+     * @param name:     filename (without extension)
+     * @param view:     the ImageView that the image has to be loaded into
+     */
     private void loadImageFromStorage(String name, SquareImageView view)
     {
         try {

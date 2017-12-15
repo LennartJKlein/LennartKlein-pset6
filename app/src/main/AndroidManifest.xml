@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".SigninActivity"
+            android:name=".SignInActivity"
             android:label="@string/title_activity_signin" />
 
         <activity

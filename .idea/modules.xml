@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LennartKleinpset-6.iml" filepath="$PROJECT_DIR$/LennartKleinpset-6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LennartKlein-pset6.iml" filepath="$PROJECT_DIR$/LennartKlein-pset6.iml" />
+      <module fileurl="file://C:\Users\Lennart Klein\Documents\GitHub\LennartKlein-pset6\LennartKleinpset-6.iml" filepath="C:\Users\Lennart Klein\Documents\GitHub\LennartKlein-pset6\LennartKleinpset-6.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Lennart Klein\Documents\GitHub\LennartKlein-pset6\app\app.iml" filepath="C:\Users\Lennart Klein\Documents\GitHub\LennartKlein-pset6\app\app.iml" />
     </modules>
   </component>
 </project>

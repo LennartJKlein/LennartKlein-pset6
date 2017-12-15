@@ -3,17 +3,12 @@ package nl.lennartklein.lennartklein_pset6;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,12 +33,12 @@ public class PhotoAdapter extends ArrayAdapter<HashMap<String, String>> {
     private ArrayList<HashMap<String, String>> data = new ArrayList<>();
     private Activity mActivity;
 
-    PhotoAdapter(Activity activity, Context context, int listResourceID, ArrayList<HashMap<String, String>> list) {
+    PhotoAdapter(Activity activity, Context context, ArrayList<HashMap<String, String>> list) {
         super(context, 0, list);
         data = list;
         mContext = context;
         mActivity = activity;
-        resourceID = listResourceID;
+        resourceID = R.layout.list_item_photo;
     }
 
     @NonNull
@@ -75,6 +70,9 @@ public class PhotoAdapter extends ArrayAdapter<HashMap<String, String>> {
         return convertView;
     }
 
+    /**
+     * Click listener for adding this image to the users collection
+     */
     private class AddToCollection implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -109,6 +107,12 @@ public class PhotoAdapter extends ArrayAdapter<HashMap<String, String>> {
         }
     }
 
+    /**
+     * Function to save an image to the internal storage of the user for better performance
+     * @param bitmapImage:  the image to save
+     * @param name:         filename (without extension)
+     * @return:             path of the saved file
+     */
     private String saveToInternalStorage(Bitmap bitmapImage, String name){
         ContextWrapper cw = new ContextWrapper(mContext.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir

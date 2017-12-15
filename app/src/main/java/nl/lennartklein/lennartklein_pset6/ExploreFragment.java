@@ -31,6 +31,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Shows the NASA apod feed with buttons for saving the images
+ */
 public class ExploreFragment extends ListFragment {
 
     // Global references
@@ -90,6 +93,9 @@ public class ExploreFragment extends ListFragment {
         });
     }
 
+    /**
+     * Set the content of the ListView with the feed from the API
+     */
     private void setListContent() {
         refreshSwipe.setRefreshing(true);
 
@@ -126,7 +132,7 @@ public class ExploreFragment extends ListFragment {
                                 }
                             }
                             // Use an adapter and the ArrayList to feed the list
-                            PhotoAdapter adapter = new PhotoAdapter(getActivity(), mContext, R.layout.list_item_photo, photos);
+                            PhotoAdapter adapter = new PhotoAdapter(getActivity(), mContext, photos);
                             lv.setAdapter(adapter);
 
                             // Hide progress indicator
@@ -155,13 +161,6 @@ public class ExploreFragment extends ListFragment {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(request);
 
-    }
-
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-            // When photo item is pressed
     }
 
 }

@@ -47,7 +47,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class SigninActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class SignInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     // Keep track of the login
     private FirebaseAuth mAuth;
@@ -106,7 +106,7 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
         // Check if the user is already signed in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            goToLibrary();
+            enterApp();
         }
     }
 
@@ -163,20 +163,20 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
 
             // Sign in
             mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(SigninActivity.this, new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("Sign in", "signInWithEmail:success");
-                                goToLibrary();
+                                enterApp();
 
                             } else {
                                 Log.w("Sign in", "signInWithEmail:failure", task.getException());
 
                                 // Try to sign up
                                 mAuth.createUserWithEmailAndPassword(email, password)
-                                        .addOnCompleteListener(SigninActivity.this, new OnCompleteListener<AuthResult>() {
+                                        .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if (task.isSuccessful()) {
@@ -191,11 +191,11 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
                                                     db.child(userID).setValue(thisUser);
 
                                                     // Enter the app
-                                                    goToLibrary();
+                                                    enterApp();
                                                 } else {
                                                     // If sign up fails, display a message to the user.
                                                     Log.w("Sign up", "createUserWithEmail:failure", task.getException());
-                                                    Toast.makeText(SigninActivity.this, R.string.error_authentication, Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(SignInActivity.this, R.string.error_authentication, Toast.LENGTH_SHORT).show();
                                                     showProgress(false);
                                                 }
                                             }
@@ -250,7 +250,10 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
         });
     }
 
-    public void goToLibrary() {
+    /**
+     * Enter the app by starting the MainActivity
+     */
+    public void enterApp() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
@@ -349,7 +352,7 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(SigninActivity.this,
+                new ArrayAdapter<>(SignInActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
         mEmailView.setAdapter(adapter);
     }
@@ -367,11 +370,17 @@ public class SigninActivity extends AppCompatActivity implements LoaderCallbacks
         int IS_PRIMARY = 1;
     }
 
+    /**
+     * Start the activity to reset the users password
+     * @param view: the view that activated this method
+     */
     public void resetPassword(View view) {
         startActivity(new Intent(this, ResetPasswordActivity.class));
     }
 
-    // Back button on device
+    /**
+     * Cancel the login when back button is pressed
+     */
     @Override
     public void onBackPressed() {
         // Cancel login
