@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/user_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="4dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_name"
+        android:paddingTop="12dp"
+        android:paddingBottom="6dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp" />
+
+    <GridView
+        android:id="@+id/android:list"
+        tools:listitem="@layout/grid_item_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="0dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center_vertical"
+        android:persistentDrawingCache="animation" />
+
+</LinearLayout>

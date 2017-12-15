@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "458443327398",
+    "firebase_url": "https://space-watchers-7f24a.firebaseio.com",
+    "project_id": "space-watchers-7f24a",
+    "storage_bucket": "space-watchers-7f24a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458443327398:android:a74f2da9406712d0",
+        "android_client_info": {
+          "package_name": "nl.lennartklein.lennartklein_pset6"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458443327398-0eer1u7ioei2pivlm39m21tb5lbpf5s3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nl.lennartklein.lennartklein_pset6",
+            "certificate_hash": "f0983d01ad9f17fa6bb17d648b59b6a474c15c3c"
+          }
+        },
+        {
+          "client_id": "458443327398-eqslp618nu52vqiqctuqfgp557ec3e6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQNHa1VpGqyW21eGM5TaRHyzvx1WVZtBc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458443327398-eqslp618nu52vqiqctuqfgp557ec3e6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

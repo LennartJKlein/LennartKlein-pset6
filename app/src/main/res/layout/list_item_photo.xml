@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
+        android:padding="0dp"
+        android:elevation="2dp"
+        android:background="@drawable/background_card">
+
+        <ImageView
+            android:id="@+id/photo_image"
+            android:src="@drawable/no_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"/>
+
+        <ImageButton
+            android:id="@+id/action_photo_save"
+            android:layout_width="@dimen/item_button_size"
+            android:layout_height="@dimen/item_button_size"
+            android:layout_marginEnd="@dimen/activity_margin_small"
+            android:layout_marginBottom="8dp"
+            android:layout_alignBottom="@id/photo_image"
+            android:layout_alignEnd="@+id/photo_image"
+            android:src="@drawable/ic_library_add_24dp"
+            android:background="@drawable/button_round" />
+
+        <TextView
+            android:id="@+id/photo_title"
+            android:text="@string/placeholder_photo_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="18sp"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_margin_small"
+            android:layout_below="@id/photo_image" />
+
+        <TextView
+            android:id="@+id/photo_explanation"
+            android:text="@string/placeholder_photo_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_margin_small"
+            android:paddingBottom="@dimen/activity_margin_small"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:layout_below="@+id/photo_title" />
+
+        <TextView
+            android:id="@+id/photo_date"
+            android:text="@string/placeholder_photo_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="12sp"
+            android:textColor="@color/colorGrey"
+            android:layout_below="@id/photo_explanation" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
