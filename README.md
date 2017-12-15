@@ -2,9 +2,9 @@
 
 An android app for space geeks. The app shows 25 images from NASA every day. Users can save their favorite images to their own collection. This collection is shared among other users.
 
-![Space Watchers - signin](/docs/screenshot-signin.png?raw=true "Space Watchers - signin")
-![Space Watchers - explore](/docs/screenshot-explore.png?raw=true "Space Watchers - explore")  
-![Space Watchers - collection](/docs/screenshot-collection.png?raw=true "Space Watchers - collection")
+![Space Watchers - signin](/docs/screenshot-signin.png?raw=true "Space Watchers - signin") 
+![Space Watchers - explore](/docs/screenshot-explore.png?raw=true "Space Watchers - explore") 
+![Space Watchers - collection](/docs/screenshot-collection.png?raw=true "Space Watchers - collection") 
 ![Space Watchers - community](/docs/screenshot-community.png?raw=true "Space Watchers - community")
 
 ## Getting Started
